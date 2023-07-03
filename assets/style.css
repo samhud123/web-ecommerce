@@ -1,0 +1,13 @@
+.icon-search {
+    cursor: pointer;
+}
+
+form #search {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .card-catalog {
+        width: 12rem;
+    }
+}
