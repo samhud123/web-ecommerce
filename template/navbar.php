@@ -10,11 +10,11 @@
                 <li class="nav-item me-3">
                     <a class="nav-link <?php if($title == 'BO Printing') echo 'active'; ?>" aria-current="page" href="index.php">Home</a>
                 </li>
-                <li class="nav-item me-3 <?php if($title == 'About') echo 'active'; ?>">
-                    <a class="nav-link" href="about.php">About Us</a>
+                <li class="nav-item me-3">
+                    <a class="nav-link <?php if($title == 'About') echo 'active'; ?>" href="about.php">About Us</a>
                 </li>
-                <li class="nav-item me-3 <?php if($title == 'Order') echo 'active'; ?>">
-                    <a class="nav-link" href="order.php">Order Product</a>
+                <li class="nav-item me-3">
+                    <a class="nav-link <?php if($title == 'Order') echo 'active'; ?>" href="order.php">Order Product</a>
                 </li>
             </ul>
             <form class="d-flex ms-auto" role="search" action="catalog.php" method="get">
