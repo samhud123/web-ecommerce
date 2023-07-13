@@ -1,6 +1,8 @@
 <?php
 
 session_start();
+ob_start();
+
 if (!isset($_SESSION['login'])) {
     header("location: auth/login.php");
     exit();
@@ -102,7 +104,7 @@ if (isset($_POST['update'])) {
                                                 <label>Harga</label>
                                             </div>
                                             <div class="col-md-8 form-group">
-                                                <input type="number" id="Harga" class="form-control" name="Harga" value="<?= $dataStock['Harga'] ?>" disabled>
+                                                <input type="text" id="Harga" class="form-control" name="Harga" value="Rp <?= number_format($dataStock['Harga'], 0, ',', '.') ?>" disabled>
                                             </div>
                                             <div class="col-md-4">
                                                 <label>Deskripsi</label>
@@ -123,9 +125,6 @@ if (isset($_POST['update'])) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer text-muted">
-                2 days ago
             </div>
         </div>
 

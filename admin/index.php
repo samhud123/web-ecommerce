@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['login'])){
+if (!isset($_SESSION['login'])) {
     header("location: auth/login.php");
     exit();
 }
@@ -85,7 +85,7 @@ $pemasukan = mysqli_fetch_array($queryPemasukan);
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Pemasukan</h6>
-                                        <h6 class="font-extrabold mb-0">Rp <?=number_format($pemasukan['JUMLAH'], 0, ',', '.')?></h6>
+                                        <h6 class="font-extrabold mb-0">Rp <?= number_format($pemasukan['JUMLAH'], 0, ',', '.') ?></h6>
                                     </div>
                                 </div>
                             </div>
@@ -96,10 +96,29 @@ $pemasukan = mysqli_fetch_array($queryPemasukan);
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Profile Visit</h4>
+                                <h4>Pesanan Terbaru</h4>
                             </div>
-                            <div class="card-body">
-                                <div id="chart-profile-visit"></div>
+                            <div class="card-content pb-4">
+                                <?php
+                                $pesananTerbaru = mysqli_query($con, "SELECT tb_pemesanan.nama, tb_pemesanan.kd_pemesanan, tb_user.username FROM tb_pemesanan, tb_user WHERE tb_pemesanan.id_user = tb_user.id_user AND tb_pemesanan.status != 'Selesai' ORDER BY tb_pemesanan.tanggal DESC LIMIT 5");
+                                while ($terbaru = mysqli_fetch_array($pesananTerbaru)) {
+                                ?>
+                                    <div class="recent-message d-flex px-4 py-3">
+                                        <div class="avatar avatar-lg">
+                                            <img src="assets/images/faces/user.png">
+                                        </div>
+                                        <div class="name ms-4">
+                                            <h5 class="mb-1"><?= $terbaru['nama']; ?></h5>
+                                            <h6 class="text-muted mb-0">@<?= $terbaru['username']; ?></h6>
+                                        </div>
+                                        <div class="ms-auto">
+                                            <label for="">Lihat Detail <i class="fa-solid fa-arrow-right"></i> </label>
+                                            <a href="detail-pemesanan.php?kode=<?= $terbaru['kd_pemesanan']; ?>" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -121,23 +140,23 @@ $pemasukan = mysqli_fetch_array($queryPemasukan);
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h4>Pesanan Terbaru</h4>
+                        <h4>Produk Terlaris</h4>
                     </div>
                     <div class="card-content pb-4">
-                        <?php 
-                        $pesananTerbaru = mysqli_query($con, "SELECT tb_pemesanan.nama, tb_user.username FROM tb_pemesanan, tb_user WHERE tb_pemesanan.id_user = tb_user.id_user ORDER BY tb_pemesanan.tanggal DESC LIMIT 3");
-                        while($terbaru = mysqli_fetch_array($pesananTerbaru)){
+                        <?php
+                        $produkTerlaris = mysqli_query($con, "SELECT DISTINCT(tb_pemesanan.Kd_Barang) AS kode, COUNT(tb_pemesanan.Kd_Barang) AS kodeBarang, tb_stock.Nama_Barang, tb_stock.foto FROM tb_pemesanan, tb_stock WHERE tb_pemesanan.Kd_Barang = tb_stock.Kd_Barang GROUP BY kode LIMIT 3");
+                        while ($terlaris = mysqli_fetch_array($produkTerlaris)) {
                         ?>
                             <div class="recent-message d-flex px-4 py-3">
                                 <div class="avatar avatar-lg">
-                                    <img src="assets/images/faces/user.png">
+                                    <img src="assets/images/stock/<?= $terlaris['foto']; ?>">
                                 </div>
                                 <div class="name ms-4">
-                                    <h5 class="mb-1"><?= $terbaru['nama']; ?></h5>
-                                    <h6 class="text-muted mb-0">@<?= $terbaru['username']; ?></h6>
+                                    <h5 class="mb-1"><?= $terlaris['Nama_Barang']; ?></h5>
+                                    <h6 class="text-muted mb-0">Total : <?= $terlaris['kodeBarang']; ?></h6>
                                 </div>
                             </div>
-                        <?php 
+                        <?php
                         }
                         ?>
                     </div>

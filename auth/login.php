@@ -18,7 +18,7 @@ if(isset($_POST['login'])) {
             // set session
             $_SESSION['email'] = $row['email'];
             $_SESSION['username'] = $row['username'];
-            $_SESSION['id'] = $row['id_user'];
+            $_SESSION['id_user'] = $row['id_user'];
             
             header("location: ../index.php");
         } else {

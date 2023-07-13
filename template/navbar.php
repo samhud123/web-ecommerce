@@ -8,23 +8,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-4 mb-2 mb-lg-0">
                 <li class="nav-item me-3">
-                    <a class="nav-link <?php if($title === 'BO Printing') echo 'active'; ?>" aria-current="page" href="index.php">Home</a>
+                    <a class="nav-link <?php if($title == 'BO Printing') echo 'active'; ?>" aria-current="page" href="index.php">Home</a>
                 </li>
-                <li class="nav-item me-3">
-                    <a class="nav-link" href="#">About Us</a>
+                <li class="nav-item me-3 <?php if($title == 'About') echo 'active'; ?>">
+                    <a class="nav-link" href="about.php">About Us</a>
                 </li>
-                <li class="nav-item me-3 <?= $title === 'Order' ? 'active' : '' ?>">
+                <li class="nav-item me-3 <?php if($title == 'Order') echo 'active'; ?>">
                     <a class="nav-link" href="order.php">Order Product</a>
                 </li>
-                <li class="nav-item me-3">
-                    <a class="nav-link" href="#">Contact Us</a>
-                </li>
-                <li class="nav-item me-3">
-                    <a class="nav-link" href="#">News Article</a>
-                </li>
             </ul>
-            <form class="d-flex ms-auto" role="search">
-                <input class="form-control" type="search" id="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex ms-auto" role="search" action="catalog.php" method="get">
+                <input class="form-control" type="search" id="search" name="search" placeholder="Search" aria-label="Search">
             </form>
             <div class="ms-4 icon-search">
                 <i class="fa-solid fa-magnifying-glass text-white fs-4" id="icon-search"></i>
@@ -38,8 +32,12 @@
                             <i class="fa-regular fa-user text-white fs-4"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Lihat Profile</a></li>
-                            <li><a class="dropdown-item" href="auth/logout.php">Logout</a></li>
+                            <li><a class="dropdown-item" href="profile.php"><i class="fa-solid fa-eye"></i> Lihat Profile</a></li>
+                            <li><a class="dropdown-item" href="change-password.php"><i class="fa-solid fa-key"></i> Ganti Password</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item" href="auth/logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
                         </ul>
                     </div>
                 </div>

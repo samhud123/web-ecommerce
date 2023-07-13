@@ -11,7 +11,7 @@ $title = "Order";
 require_once 'template/header.php';
 require_once 'template/navbar.php';
 
-$idUser = $_SESSION['id'];
+$idUser = $_SESSION['id_user'];
 
 ?>
 

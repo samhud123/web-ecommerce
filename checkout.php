@@ -14,6 +14,10 @@ $kdBarang = $_GET['c'];
 $getData = mysqli_query($con, "SELECT * FROM tb_stock WHERE Kd_Barang = $kdBarang");
 $data = mysqli_fetch_array($getData);
 
+$id = $_SESSION['id_user'];
+$getDataUser = mysqli_query($con, "SELECT * FROM tb_user WHERE id_user = $id");
+$dataUser = mysqli_fetch_array($getDataUser);
+
 if(isset($_POST['simpan'])){
     $idUser = $_SESSION['id'];
     $nama = htmlspecialchars($_POST['nama']);
@@ -36,6 +40,8 @@ if(isset($_POST['simpan'])){
                                         ");
 
     if($insertPemesanan){
+        $stockAkhir = $data['Stock'] - $qty;
+        mysqli_query($con, "UPDATE tb_stock SET Stock = $stockAkhir WHERE Kd_Barang = $kdBarang");
         header('location: pembayaran.php');
     } else {
         echo '
@@ -60,15 +66,15 @@ if(isset($_POST['simpan'])){
                     <form action="" method="post">
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama anda" required>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama anda" required value="<?= $dataUser['nama_lengkap']; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email anda" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email anda" required value="<?= $dataUser['email']; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="nohp" class="form-label">No. HP / WA</label>
-                            <input type="number" class="form-control" id="nohp" name="nohp" placeholder="Masukkan nohp anda" required>
+                            <input type="number" class="form-control" id="nohp" name="nohp" placeholder="Masukkan nohp anda" required value="<?= $dataUser['noHP']; ?>">
                         </div>
                         <div class="mb-3">
                             <label for="jmlBarang" class="form-label">Jumlah Barang</label>
@@ -76,7 +82,7 @@ if(isset($_POST['simpan'])){
                         </div>
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
-                            <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="3" required><?= $dataUser['alamat']; ?></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary w-100" name="simpan">Bayar</button>
                     </form>

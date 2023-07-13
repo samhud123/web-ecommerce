@@ -1,31 +1,31 @@
 <!-- Footer -->
-<footer class="mt-5 text-center text-lg-start bg-light text-muted">
+<footer class="pt-5 text-center text-lg-start bg-light text-muted">
     <!-- Section: Social media -->
     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom bg-primary text-white">
         <!-- Left -->
         <div class="me-5 d-none d-lg-block">
-            <span>Get connected with us on social networks:</span>
+            <span>Ikuti Sosial Media kami untuk mendapatkan hal menarik : </span>
         </div>
         <!-- Left -->
 
         <!-- Right -->
         <div>
-            <a href="" class="me-4 text-reset">
+            <a href="#" class="me-4 text-reset">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="" class="me-4 text-reset">
+            <a href="#" class="me-4 text-reset">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a href="" class="me-4 text-reset">
+            <a href="#" class="me-4 text-reset">
                 <i class="fab fa-google"></i>
             </a>
-            <a href="" class="me-4 text-reset">
+            <a href="#" class="me-4 text-reset">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="" class="me-4 text-reset">
+            <a href="#" class="me-4 text-reset">
                 <i class="fab fa-linkedin"></i>
             </a>
-            <a href="" class="me-4 text-reset">
+            <a href="#" class="me-4 text-reset">
                 <i class="fab fa-github"></i>
             </a>
         </div>
@@ -45,8 +45,7 @@
                         <i class="fas fa-gem me-3"></i>BO Printing
                     </h6>
                     <p>
-                        Here you can use rows and columns to organize your footer content. Lorem ipsum
-                        dolor sit amet, consectetur adipisicing elit.
+                        Kami adalah sebuah kelompok usaha bersama yang bergerak di bidang usaha layanan percetakan. Kami sangat mengutamakan kualitas demi kepuasan pelanggan.
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -57,18 +56,17 @@
                     <h6 class="text-uppercase fw-bold mb-4">
                         Kategori
                     </h6>
-                    <p>
-                        <a href="#!" class="text-reset">Angular</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">React</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Vue</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Laravel</a>
-                    </p>
+                    <?php 
+                    require_once 'config.php';
+                    $jenisBarang = mysqli_query($con, "SELECT Jenis_Barang FROM tb_stock");
+                    while($category = mysqli_fetch_array($jenisBarang)){
+                    ?>
+                        <p>
+                            <a href="catalog.php?search=<?= $category['Jenis_Barang']; ?>" class="text-reset"><?= $category['Jenis_Barang']; ?></a>
+                        </p>
+                    <?php 
+                    }
+                    ?>  
                 </div>
                 <!-- Grid column -->
 
@@ -76,13 +74,12 @@
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">Kontak</h6>
-                    <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                    <p><i class="fas fa-home me-3"></i> Buaran, Pekalongan</p>
                     <p>
                         <i class="fas fa-envelope me-3"></i>
-                        info@example.com
+                        boprinting@gmail.com
                     </p>
-                    <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                    <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                    <p><i class="fas fa-phone me-3"></i> +62 856 4859 7435</p>
                 </div>
                 <!-- Grid column -->
             </div>

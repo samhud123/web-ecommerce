@@ -49,7 +49,7 @@ if(isset($_POST['daftar'])){
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     // tambhakn user baru ke database
-    $queryReg = mysqli_query($con, "INSERT INTO tb_user (username, password, email) VALUES ('$username', '$password', '$email')");
+    $queryReg = mysqli_query($con, "INSERT INTO tb_user (username, password, email, foto) VALUES ('$username', '$password', '$email', 'user.png')");
 
     if($queryReg){
         echo "

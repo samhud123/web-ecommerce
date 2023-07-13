@@ -54,7 +54,7 @@ require_once 'template/navbar.php';
     <h2 class="text-center mb-4">Catalog</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php
-        $queryStockData = mysqli_query($con, "SELECT * FROM tb_stock LIMIT 6");
+        $queryStockData = mysqli_query($con, "SELECT * FROM tb_stock WHERE Stock != 0 LIMIT 6");
         while ($stockData = mysqli_fetch_array($queryStockData)) {
         ?>
             <div class="col text-center">
@@ -62,12 +62,24 @@ require_once 'template/navbar.php';
                     <img src="admin/assets/images/stock/<?= $stockData['Foto']; ?>" class="card-img-top" alt="..." height="280px">
                     <div class="card-body">
                         <h5 class="card-title"><?= $stockData['Nama_Barang']; ?></h5>
-                        <p class="card-text">Rp <?= $stockData['Harga']; ?></p>
+                        <p class="fs-5 fw-bold">Rp <?= number_format($stockData['Harga'], 0, ',', '.') ?></p>
+                        <p class="card-text">Stock Tersedia : <b><?= $stockData['Stock']; ?></b></p>
+                        <p class="card-text"><?= $stockData['Deskripsi']; ?></p>
                         <a href="checkout.php?c=<?= $stockData['Kd_Barang']; ?>" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Order Sekarang</a>
                     </div>
                 </div>
             </div>
         <?php
+        }
+
+        $allData = mysqli_query($con, "SELECT * FROM tb_stock");
+        if(mysqli_num_rows($allData) > 6){
+        
+        ?>
+            <div class="text-center w-100 mt-5">
+                <a href="catalog.php" class="text-decoration-none fs-5">Lihat Semua <i class="fa-solid fa-circle-arrow-right"></i></a>
+            </div>
+        <?php 
         }
         ?>
     </div>
