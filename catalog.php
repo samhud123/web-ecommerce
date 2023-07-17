@@ -9,18 +9,6 @@ require_once 'template/navbar.php';
 
 ?>
 
-<!-- header -->
-<!-- <div class="card bg-dark" style="height: 85vh; margin-top: -10px;">
-  <img src="assets/image/banner.jpg" class="card-img" height="100%" style="opacity: 0.2;">
-  <div class="card-img-overlay d-flex align-items-center text-white justify-content-center">
-    <div class="d-block text-center w-75">
-        <h1 class="card-title" style="font-size: 70px;">BO Printing</h1>
-        <p class="card-text fs-4">Percetakan Berkualitas, Hasil Memukau! Transformasikan Impianmu, Cetak Realitimu! Anda berhak mendapatkan kualitas terbaik</p>
-        <a href="#catalog" class="btn btn-primary">Lihat Catalog <i class="fa-solid fa-eye"></i></a>
-    </div>
-  </div>
-</div> -->
-
 <!-- Catalog -->
 <div class="container mt-5" id="catalog">
     <h2 class="text-center mb-4"><?= isset($_GET['search']) == true ? 'Hasil Pencarian ' : 'All Catalog' ?></h2>
